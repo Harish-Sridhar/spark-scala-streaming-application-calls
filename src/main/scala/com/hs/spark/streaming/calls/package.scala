@@ -12,4 +12,6 @@ package object calls {
     implicit val callsFormat = jsonFormat12(calls)
   }
 
+  final case class call_metrics(window_start_time: String, Window_end_time: String, avg_call_duration: Double, median_call_duration: Double, avg_queue_duration: Double, median_queue_duration: Double, total_disconnected_calls: Int, total_repeat_customers: Int, total_calls: Int)
+
 }

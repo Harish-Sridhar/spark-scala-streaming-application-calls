@@ -8,7 +8,8 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-streaming" % "2.4.0",
   "org.apache.spark" %% "spark-streaming-kafka-0-10" % "2.4.0",
   "com.typesafe" % "config" % "1.3.0",
-  "io.spray" %%  "spray-json" % "1.3.5"
+  "io.spray" %%  "spray-json" % "1.3.5",
+  "joda-time" % "joda-time" % "2.10.1"
   )
 
 

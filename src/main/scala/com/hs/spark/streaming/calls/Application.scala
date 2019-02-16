@@ -7,6 +7,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.streaming.kafka010._
 import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
 import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
+import org.joda.time.DateTime
 import spray.json.JsonParser
 
 object Application {
@@ -33,7 +34,7 @@ object Application {
 
     val outStream = inStream.map(_.value())
       .map(x => JsonParser(x).convertTo[calls] )
-      .map(calls => calls.call_id)
+      .map(calls => CallsProcess.calculateTimeUnits(calls))
 
     outStream.print(10)
 
