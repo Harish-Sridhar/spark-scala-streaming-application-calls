@@ -32,10 +32,21 @@ object Application {
       Subscribe[String, String](topics, kafkaParams)
     )
 
-    val outStream = inStream.map(_.value())
+    val enrichedStream = inStream.map(_.value())
       .map(x => JsonParser(x).convertTo[calls] )
-      .map(calls => CallsProcess.calculateTimeUnits(calls))
+      .map(calls => ProcessCalls.enrichCalls(calls))
 
+    val windowedStream = enrichedStream.window(Seconds(60), Seconds(10))
+
+    val outStream=windowedStream.map(calls_enriched => (calls_enriched.total_call_duration, calls_enriched.total_queue_duration,calls_enriched.total_handling_duration, 1))
+        .reduce({
+          case ((total_call_duration1: Long, total_queue_duration1 : Long, total_handling_duration1: Long, total_calls1: Int ),(total_call_duration2 :Long, total_queue_duration2 : Long, total_handling_duration2: Long, total_calls2: Int)) =>
+            (total_call_duration1+total_call_duration2, total_queue_duration1 + total_queue_duration2, total_handling_duration1+total_handling_duration2, total_calls1+total_calls2)
+        })
+        .map(record => (record._1/record._4, record._2/record._4, record._3/record._4, record._4))
+
+
+    enrichedStream.print(2)
     outStream.print(10)
 
     ssc.start()

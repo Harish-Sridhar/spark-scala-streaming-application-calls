@@ -28,10 +28,10 @@ Step 3: Calculate following metrics per 10 minute sliding window:
    * Average call duration.
    * Total number of repeated customers.
 
-Step 4: Calculate anamolous calls.
-Step 5: Calculate top 5 call reasons.
-Step 6: Join Calls with Product File data
-Step 7: Produce results to kafka topic.
+Step 4: Calculate anamolous calls.  
+Step 5: Calculate top 5 call reasons.  
+Step 6: Join Calls with Product File data  
+Step 7: Produce results to kafka topic.  
 Step 8: Send the results to live dashboard.
 
 
