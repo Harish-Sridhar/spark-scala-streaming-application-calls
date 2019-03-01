@@ -46,4 +46,4 @@ spark-submit --class "com.hs.spark.streaming.calls.Application" --master spark:/
 2. Version conflict between spark and scala.
 3. Need to create fat jar for spark-submit --> [Helpful Link](http://queirozf.com/entries/creating-scala-fat-jars-for-spark-on-sbt-with-sbt-assembly-plugin)
 4. Consumer Record is not serializable. So print on the stream<consumer Records> will not work. [Helpful Link](https://stackoverflow.com/questions/49310214/spark-parallel-stream-object-not-serializable)
-5. 
+5. Kafka Producer initialization/ serialization issue --> [Helpful Link] (https://allegro.tech/2015/08/spark-kafka-integration.html)
